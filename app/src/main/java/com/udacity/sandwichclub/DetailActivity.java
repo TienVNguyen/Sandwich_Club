@@ -8,7 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
-import com.udacity.sandwichclub.model.Sandwich;
+import com.udacity.sandwichclub.models.SandwichModel;
 import com.udacity.sandwichclub.utils.JsonUtils;
 
 import java.util.List;
@@ -49,14 +49,14 @@ public class DetailActivity extends AppCompatActivity {
 
         String[] sandwiches = getResources().getStringArray(R.array.sandwich_details);
         String json = sandwiches[position];
-        Sandwich sandwich = JsonUtils.parseSandwichJson(json);
-        if (sandwich == null) {
-            // Sandwich data unavailable
+        SandwichModel model = JsonUtils.parseSandwichJson(json);
+        if (model == null) {
+            // SandwichModel data unavailable
             closeOnError();
             return;
         }
 
-        populateUI(sandwich);
+        populateUI(model);
 
         Picasso.with(this)
                 .load("https://upload.wikimedia.org/wikipedia/commons/4/48/Chivito1.jpg")
@@ -64,7 +64,7 @@ public class DetailActivity extends AppCompatActivity {
                 .error(R.mipmap.ic_launcher_round)
                 .into(mIngredientsIv);
 
-        setTitle(sandwich.getMainName());
+        setTitle(model.getMainName());
     }
 
     private void closeOnError() {
@@ -72,13 +72,13 @@ public class DetailActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
     }
 
-    private void populateUI(Sandwich sandwich) {
-        mOriginTv.setText(sandwich.getPlaceOfOrigin());
-        mDescriptionTv.setText(sandwich.getDescription());
+    private void populateUI(SandwichModel model) {
+        mOriginTv.setText(model.getPlaceOfOrigin());
+        mDescriptionTv.setText(model.getDescription());
 
-        List<String> ingredients = sandwich.getIngredients();
+        List<String> ingredients = model.getIngredients();
         if (!ingredients.isEmpty()) mIngredientsTv.setText(String.valueOf(ingredients));
-        List<String> alsoKnownAs = sandwich.getAlsoKnownAs();
+        List<String> alsoKnownAs = model.getAlsoKnownAs();
         if (!alsoKnownAs.isEmpty()) mAlsoKnownTv.setText(String.valueOf(alsoKnownAs));
     }
 }

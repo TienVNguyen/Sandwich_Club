@@ -1,6 +1,7 @@
 package com.udacity.sandwichclub.utils;
 
-import com.udacity.sandwichclub.model.Sandwich;
+import com.udacity.sandwichclub.constants.SandwichConst;
+import com.udacity.sandwichclub.models.SandwichModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -12,28 +13,28 @@ import java.util.List;
 public class JsonUtils {
 
     /**
-     * convert from Json to object Sandwich
+     * convert from Json to object SandwichModel
      *
      * @param json Input data as JSON string format
-     * @return @Sandwich Output
+     * @return @SandwichModel Output
      */
-    public static Sandwich parseSandwichJson(String json) {
+    public static SandwichModel parseSandwichJson(String json) {
         if (json.isEmpty()) return null;
 
-        Sandwich sandwich = new Sandwich();
+        SandwichModel model = new SandwichModel();
         try {
-            JSONObject jsonObject = new JSONObject(json);
-            JSONObject name = jsonObject.getJSONObject("name");
-            sandwich.setMainName(name.getString("mainName"));
-            sandwich.setAlsoKnownAs(jsonArrayToList(name.getJSONArray("alsoKnownAs")));
-            sandwich.setPlaceOfOrigin(jsonObject.getString("placeOfOrigin"));
-            sandwich.setDescription(jsonObject.getString("description"));
-            sandwich.setImage(jsonObject.getString("image"));
-            sandwich.setIngredients(jsonArrayToList(jsonObject.getJSONArray("ingredients")));
+            JSONObject object = new JSONObject(json);
+            JSONObject name = object.getJSONObject(SandwichConst.NAME);
+            model.setMainName(name.getString(SandwichConst.MAIN_NAME));
+            model.setAlsoKnownAs(jsonArrayToList(name.getJSONArray(SandwichConst.ALSO_KNOWN_AS)));
+            model.setPlaceOfOrigin(object.getString(SandwichConst.PLACE_OF_ORIGIN));
+            model.setDescription(object.getString(SandwichConst.DESCRIPTION));
+            model.setImage(object.getString(SandwichConst.IMAGE));
+            model.setIngredients(jsonArrayToList(object.getJSONArray(SandwichConst.INGREDIENTS)));
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return sandwich;
+        return model;
     }
 
     /**
