@@ -2,19 +2,19 @@ package com.udacity.sandwichclub;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.udacity.sandwichclub.R;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.squareup.picasso.Picasso;
 import com.udacity.sandwichclub.models.SandwichModel;
 import com.udacity.sandwichclub.utils.JsonUtils;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class DetailActivity extends AppCompatActivity {
@@ -22,16 +22,16 @@ public class DetailActivity extends AppCompatActivity {
     public static final String EXTRA_POSITION = "extra_position";
     private static final int DEFAULT_POSITION = -1;
 
-    @Bind(R.id.image_iv)
-    private ImageView mIngredientsIv;
-    @Bind(R.id.origin_tv)
-    private TextView mOriginTv;
-    @Bind(R.id.description_tv)
-    private TextView mDescriptionTv;
-    @Bind(R.id.ingredients_tv)
-    private TextView mIngredientsTv;
-    @Bind(R.id.also_known_tv)
-    private TextView mAlsoKnownTv;
+    @BindView(R.id.image_iv)
+    protected ImageView mIngredientsIv;
+    @BindView(R.id.origin_tv)
+    protected TextView mOriginTv;
+    @BindView(R.id.description_tv)
+    protected TextView mDescriptionTv;
+    @BindView(R.id.ingredients_tv)
+    protected TextView mIngredientsTv;
+    @BindView(R.id.also_known_tv)
+    protected TextView mAlsoKnownTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
