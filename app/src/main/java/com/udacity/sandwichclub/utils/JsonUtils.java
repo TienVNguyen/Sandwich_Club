@@ -25,11 +25,11 @@ public class JsonUtils {
         try {
             JSONObject object = new JSONObject(json);
             JSONObject name = object.getJSONObject(SandwichConst.NAME);
-            model.setMainName(name.getString(SandwichConst.MAIN_NAME));
+            model.setMainName(name.optString(SandwichConst.MAIN_NAME));
             model.setAlsoKnownAs(jsonArrayToList(name.getJSONArray(SandwichConst.ALSO_KNOWN_AS)));
-            model.setPlaceOfOrigin(object.getString(SandwichConst.PLACE_OF_ORIGIN));
-            model.setDescription(object.getString(SandwichConst.DESCRIPTION));
-            model.setImage(object.getString(SandwichConst.IMAGE));
+            model.setPlaceOfOrigin(object.optString(SandwichConst.PLACE_OF_ORIGIN));
+            model.setDescription(object.optString(SandwichConst.DESCRIPTION));
+            model.setImage(object.optString(SandwichConst.IMAGE));
             model.setIngredients(jsonArrayToList(object.getJSONArray(SandwichConst.INGREDIENTS)));
         } catch (JSONException e) {
             e.printStackTrace();

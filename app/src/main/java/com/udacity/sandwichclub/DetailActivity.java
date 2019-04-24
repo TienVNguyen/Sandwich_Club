@@ -7,21 +7,30 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.udacity.sandwichclub.R;
 import com.squareup.picasso.Picasso;
 import com.udacity.sandwichclub.models.SandwichModel;
 import com.udacity.sandwichclub.utils.JsonUtils;
 
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class DetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_POSITION = "extra_position";
     private static final int DEFAULT_POSITION = -1;
 
+    @Bind(R.id.image_iv)
     private ImageView mIngredientsIv;
+    @Bind(R.id.origin_tv)
     private TextView mOriginTv;
+    @Bind(R.id.description_tv)
     private TextView mDescriptionTv;
+    @Bind(R.id.ingredients_tv)
     private TextView mIngredientsTv;
+    @Bind(R.id.also_known_tv)
     private TextView mAlsoKnownTv;
 
     @Override
@@ -29,11 +38,7 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        mIngredientsIv = findViewById(R.id.image_iv);
-        mOriginTv = findViewById(R.id.origin_tv);
-        mDescriptionTv = findViewById(R.id.description_tv);
-        mIngredientsTv = findViewById(R.id.ingredients_tv);
-        mAlsoKnownTv = findViewById(R.id.also_known_tv);
+        ButterKnife.bind(this);
 
         Intent intent = getIntent();
         if (intent == null) {
